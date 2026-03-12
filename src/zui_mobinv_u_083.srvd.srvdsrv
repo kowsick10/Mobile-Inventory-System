@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Mobile System 083'
+define service ZUI_MOBINV_U_083 {
+  expose ZC_MobInv_U_083 as MobileSystem;
+  expose ZI_SUPPLIER_083 as Supplier;
+}

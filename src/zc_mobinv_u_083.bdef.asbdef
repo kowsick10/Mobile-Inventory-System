@@ -1,0 +1,15 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_MobInv_U_083 alias MobileSystem
+{
+  use create;
+  use update;
+  use delete;
+
+  use action payWithGPay;
+  use action generateInvoice;
+
+  // Expose the new discount action to the Fiori UI
+  use action applyDiscount;
+}

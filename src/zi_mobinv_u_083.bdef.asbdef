@@ -1,0 +1,57 @@
+unmanaged implementation in class zbp_i_mobinv_u_083 unique;
+strict ( 2 );
+
+define behavior for ZI_MobInv_U_083 alias MobileSystem
+lock master
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  // Keys are only read-only during an UPDATE.
+  field ( readonly : update ) StoreId, PhoneId;
+  field ( mandatory : create ) StoreId;
+
+  // These admin and status fields remain strictly read-only
+  field ( readonly ) PaymentStatus, InvoiceStatus, CreatedBy, CreatedAt, LastChangedBy, LastChangedAt, LocalLastChangedAt;
+
+  field ( mandatory ) Brand, Model, Price;
+
+  // ==========================================================
+  // Custom Actions (Upgraded for Dynamic UI & Parameters!)
+  // ==========================================================
+  action ( features : instance ) payWithGPay result [1] $self;
+  action ( features : instance ) generateInvoice result [1] $self;
+
+  // New Discount Action with Parameter (Popup Window)
+  action applyDiscount parameter ZAB_DISCOUNT_083 result [1] $self;
+
+  mapping for zmb_inv_u_083
+  {
+    StoreId = store_id;
+    PhoneId = phone_id;
+    Brand = brand;
+    Model = model;
+    Price = price;
+    Currency = currency;
+    StockCount = stock_count;
+
+    // --- NEW ELITE FEATURES MAPPING ---
+    MaxCapacity = max_capacity;
+    SupplierId = supplier_id;
+    ImageUrl = image_url;
+
+    DeliveryModel = delivery_model;
+    PaymentMethod = payment_method;
+    PaymentStatus = payment_status;
+    InvoiceStatus = invoice_status;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+
+  }
+}

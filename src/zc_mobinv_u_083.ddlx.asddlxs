@@ -1,0 +1,113 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: { 
+  typeName: 'Mobile Phone', 
+  typeNamePlural: 'Mobile Phones',
+  title: { type: #STANDARD, value: 'Model' },       // Large Title in Detail Page
+  description: { type: #STANDARD, value: 'Brand' }, // Subtitle in Detail Page
+  imageUrl: 'ImageUrl'                              // Main Image in Detail Page
+}
+
+/* ==========================================================
+   1. ENTITY LEVEL ANNOTATIONS (Scope: Entity)
+   Defining the Radial Chart at the top to avoid Scope Errors
+   ========================================================== */
+@UI.chart: [{
+  title: 'Inventory Status',
+  chartType: #DONUT,             // This creates the 'Radial' look
+  measures: ['StockCount'],      // Matches the field below
+  measureAttributes: [{
+    measure: 'StockCount',
+    role: #AXIS_1,
+    asDataPoint: true            // Pulls colors/target from DataPoint
+  }]
+}]
+
+annotate view ZC_MobInv_U_083 with 
+{
+  // ==========================================================
+  // 2. PAGE LAYOUT & FACETS (Attractive Detail Page)
+  // ==========================================================
+  @UI.facet: [ 
+    // Header KPIs (Shown in the top bar of the Detail Page)
+    { id: 'HeaderPrice', purpose: #HEADER, type: #DATAPOINT_REFERENCE, targetQualifier: 'PriceData', position: 10 },
+    
+    // Body Content Sections
+    { id: 'GeneralInfo', purpose: #STANDARD, type: #COLLECTION, label: 'Device Specifications', position: 10 },
+       { id: 'BasicData', parentId: 'GeneralInfo', type: #FIELDGROUP_REFERENCE, targetQualifier: 'BasicGroup', label: 'Details', position: 10 },
+       { id: 'LogisticsData', parentId: 'GeneralInfo', type: #FIELDGROUP_REFERENCE, targetQualifier: 'LogisticsGroup', label: 'Inventory', position: 20 },
+
+    { id: 'SalesInfo', purpose: #STANDARD, type: #COLLECTION, label: 'Sales & Billing', position: 20 },
+       { id: 'SalesData', parentId: 'SalesInfo', type: #FIELDGROUP_REFERENCE, targetQualifier: 'SalesGroup', label: 'Transaction Details', position: 10 }
+  ]
+
+  // ==========================================================
+  // 3. FIELD ANNOTATIONS (Attractive List & Groups)
+  // ==========================================================
+
+  @UI.lineItem: [{ position: 5, label: ' ' }] // Image thumbnail
+  ImageUrl;
+
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem: [{ position: 10, label: 'Store ID' },
+                 { type: #FOR_ACTION, dataAction: 'applyDiscount', label: 'Apply Discount' }]
+  @UI.fieldGroup: [{ qualifier: 'BasicGroup', position: 10, label: 'Store ID' }]
+  StoreId;
+
+  @UI.selectionField: [{ position: 20 }]
+  @UI.lineItem: [{ position: 20, label: 'Manufacturer' }]
+  @UI.fieldGroup: [{ qualifier: 'BasicGroup', position: 20, label: 'Manufacturer' }]
+  Brand;
+
+  @UI.lineItem: [{ position: 30, label: 'Model' }]
+  @UI.fieldGroup: [{ qualifier: 'BasicGroup', position: 30, label: 'Model Name' }]
+  Model;
+
+  @UI.lineItem: [{ position: 40, label: 'Price' }]
+  @UI.dataPoint: { qualifier: 'PriceData', title: 'Current Price' } 
+  @UI.fieldGroup: [{ qualifier: 'SalesGroup', position: 10, label: 'Price' }]
+  Price;
+
+  /* --- ATTRACTIVE RADIAL MICROCHART --- */
+  @UI.lineItem: [{ 
+    position: 50, 
+    type: #AS_CHART,             // Changed to Chart type
+    label: 'Inventory Status' 
+  }]
+  @UI.dataPoint: { 
+    title: 'Current Stock', 
+    targetValueElement: 'MaxCapacity', 
+    criticality: 'StockCriticality'
+    // Visualization #PROGRESS removed to allow Radial view
+  }
+  @UI.fieldGroup: [{ qualifier: 'LogisticsGroup', position: 10, label: 'Available Stock' }]
+  StockCount;
+  
+  @UI.fieldGroup: [{ qualifier: 'LogisticsGroup', position: 15, label: 'Maximum Capacity' }]
+  MaxCapacity;
+
+  @UI.lineItem: [{ position: 60, label: 'Delivery' }]
+  @UI.fieldGroup: [{ qualifier: 'LogisticsGroup', position: 20, label: 'Shipping Model' }]
+  DeliveryModel;
+
+  @UI.lineItem: [{ position: 70, label: 'Payment', criticality: 'PaymentCriticality' },
+                 { type: #FOR_ACTION, dataAction: 'payWithGPay', label: 'Pay via GPay' }]
+  @UI.fieldGroup: [{ qualifier: 'SalesGroup', position: 30, label: 'Payment Status', criticality: 'PaymentCriticality' }]
+  PaymentStatus;
+
+  @UI.lineItem: [{ position: 80, label: 'Invoice Status' }]
+  @UI.fieldGroup: [{ qualifier: 'SalesGroup', position: 40, label: 'Invoice Status' }]
+  InvoiceStatus;
+
+  // ==========================================================
+  // 4. TECHNICAL FIELDS (Hidden)
+  // ==========================================================
+  @UI.hidden: true
+  PhoneId;
+  @UI.hidden: true
+  Currency; 
+  @UI.hidden: true
+  PaymentCriticality;
+  @UI.hidden: true
+  StockCriticality;
+}
