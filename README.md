@@ -165,6 +165,13 @@ Database Tables
 ```
 
 ---
+**Output**
+**Demo 1**
+<img width="1862" height="916" alt="image" src="https://github.com/user-attachments/assets/15af6041-a2c2-48a6-b2a9-c515d6a2a785" />
+
+**Demo 2**
+<img width="1851" height="872" alt="image" src="https://github.com/user-attachments/assets/05c54b0b-c7b2-4b92-95e8-645a39566321" />
+
 
 ## Learning Outcomes
 
