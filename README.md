@@ -8,6 +8,12 @@ The project is developed using the **ABAP RESTful Application Programming Model 
 
 This system allows users to manage mobile inventory details such as device information, suppliers, and pricing details while supporting advanced RAP architecture components like **CDS Views, Behavior Definitions, Service Definitions, and Service Bindings**.
 
+**Demo 1**
+<img width="1862" height="916" alt="image" src="https://github.com/user-attachments/assets/15af6041-a2c2-48a6-b2a9-c515d6a2a785" />
+
+**Demo 2**
+<img width="1851" height="872" alt="image" src="https://github.com/user-attachments/assets/05c54b0b-c7b2-4b92-95e8-645a39566321" />
+
 ---
 
 ## Key Features
@@ -166,11 +172,6 @@ Database Tables
 
 ---
 **Output**
-**Demo 1**
-<img width="1862" height="916" alt="image" src="https://github.com/user-attachments/assets/15af6041-a2c2-48a6-b2a9-c515d6a2a785" />
-
-**Demo 2**
-<img width="1851" height="872" alt="image" src="https://github.com/user-attachments/assets/05c54b0b-c7b2-4b92-95e8-645a39566321" />
 
 **Preview **
 https://drive.google.com/file/d/1auZh6YMUUOXwpy7YYIBVd9AHsCcL4rRs/view?usp=sharing
@@ -192,8 +193,10 @@ Through this project, the following SAP RAP concepts were implemented:
 ## Author
 
 **Kowsick K**
+
 SAP ABAP Developer (Learner)
-Chennai Institute of Technolog
+
+Chennai Institute of Technology
 
 ---
 
