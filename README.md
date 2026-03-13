@@ -173,7 +173,8 @@ Database Tables
 ---
 **Output**
 
-**Preview **
+**Preview**
+
 https://drive.google.com/file/d/1auZh6YMUUOXwpy7YYIBVd9AHsCcL4rRs/view?usp=sharing
 
 ## Learning Outcomes
